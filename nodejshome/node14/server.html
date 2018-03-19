@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Server</title>
+</head>
+<body>
+	<h1>Windows Музыка</h1>
+	<audio controls="true"></audio><br>
+<input type="file" accept="audio/*" />
+<script>
+var files = document.querySelector('input'),
+	audio = document.querySelector('audio');
+
+files.addEventListener('change', function(){
+	audio.src = URL.createObjectURL(this.files[0]);  
+});
+audio.addEventListener('canplay', function(){
+	this.play();
+
+	var context = new AudioContext();
+	var input = context.createMediaElementSource(this);
+	input.connect(context.destination);
+});
+</script>
+
+</body>
+</html>
